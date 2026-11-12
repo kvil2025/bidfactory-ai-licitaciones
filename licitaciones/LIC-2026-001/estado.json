@@ -1,0 +1,51 @@
+{
+  "codigo": "LIC-2026-001",
+  "nombre": "Invitación a Licitación LIC-2026-001: Estudio Geológico-Geotécnico Túnel de Aducción y Estabilidad de Portal",
+  "mandante": "Hidroenergía Austral SpA",
+  "estado_global": "APROBADA",
+  "fase_actual": "VIII - Aprobación, envío y post-licitación",
+  "habilidad_actual": 49,
+  "urgente": false,
+  "go_no_go": {
+    "recomendacion_ia": "PENDIENTE",
+    "decision_aprobador": "GO",
+    "aprobado_por": "Carlos Cristian Ávila Elgueta",
+    "fecha": null
+  },
+  "consultas": {
+    "rondas_enviadas": 0,
+    "ultima_actualizacion_matriz": null
+  },
+  "revision_final": {
+    "estado": "VISTO BUENO OTORGADO",
+    "revisor": "Carlos Ávila",
+    "puntaje_tecnico_simulado": 94.75,
+    "observaciones_abiertas": 2
+  },
+  "aprobacion": {
+    "estado": "APROBADA PARA ENVÍO",
+    "aprobador": "Carlos Cristian Ávila Elgueta",
+    "precio_aprobado": 1447.54,
+    "moneda": "UF",
+    "fecha_hora": "2026-11-11T21:55:35",
+    "observaciones": "Visto bueno técnico y económico otorgado. Cargar sobres en portal antes de las 15:00 del día previo al cierre."
+  },
+  "historial": [
+    {
+      "fecha_hora": "2026-11-11T21:54:38",
+      "evento": "Creación de carpeta y estructura inicial de licitación"
+    },
+    {
+      "fecha_hora": "2026-11-11T21:54:38",
+      "evento": "Correo procesado (INVITACION): Invitación a Licitación LIC-2026-001: Estudio Geológico-Geotécnico Túnel de Aducción y Estabilidad de Portal | Adjuntos: 1"
+    },
+    {
+      "fecha_hora": "2026-11-11T21:55:28",
+      "evento": "Correo procesado (INVITACION): Invitación a Licitación LIC-2026-001: Estudio Geológico-Geotécnico Túnel de Aducción y Estabilidad de Portal | Adjuntos: 1"
+    },
+    {
+      "fecha_hora": "2026-11-11T21:55:35",
+      "evento": "Oferta APROBADA PARA ENVÍO por Carlos Cristian Ávila Elgueta con precio final 1,447.54 UF"
+    }
+  ]
+}

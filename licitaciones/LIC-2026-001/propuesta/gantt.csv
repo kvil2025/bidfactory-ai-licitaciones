@@ -1,0 +1,6 @@
+id,actividad,semana_inicio,duracion_semanas,responsable,entregable
+1,Reunión de inicio (Kick-off) y recopilación de antecedentes,1,1,Jefe de Proyecto,Minuta Kick-off y Plan de Terreno
+2,Campaña de levantamiento geológico-geotécnico y supervisión en terreno,2,4,Jefe de Terreno + Geólogos,Informe de Terreno y Base de Datos Preliminar
+3,Ensayos de laboratorio y procesamiento geomecánico / SIG,5,3,Especialista Geotécnico + GIS,Base Georreferenciada y Parámetros UG
+4,Modelamiento geotécnico e Informe Borrador (Rev. B),7,2,Director de Proyecto,Informe Técnico Rev. B
+5,Levantamiento de observaciones del Mandante e Informe Final (Rev. 0),9,1,Director de Proyecto,Informe Final Rev. 0 + Planos + GIS

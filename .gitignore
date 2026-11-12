@@ -1,0 +1,18 @@
+# Archivos compilados pesados y temporales locales
+build/
+dist/
+__pycache__/
+*.pyc
+*.pyo
+*.spec
+scratch_check.txt
+
+# Proteger licitaciones y correos reales de clientes (nunca subir a GitHub)
+licitaciones/LIC-CACHAPOAL-2026/
+*.eml
+!plantillas/ejemplo_invitacion_licitacion.eml
+
+# Variables de entorno y secretos
+.env
+.env.*
+.vercel/

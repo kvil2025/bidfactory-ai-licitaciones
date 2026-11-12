@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BidFactory AI — Equipo de Licitaciones | Desarrollado por Tecknologia · Diseñado por Geologgia Ltda.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================================
+     APPLE HUMAN INTERFACE GUIDELINES (HIG) — LIGHT & DARK MODE TOKENS
+     Diseño sobrio, monocromático de alto contraste, tipografía SF Pro / Inter,
+     superficies traslúcidas (vibrancy) y un solo acento azul de sistema.
+     ========================================================================== */
+  :root[data-theme="light"] {
+    --bg-primary: #F5F5F7;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #FAFAFC;
+    --bg-elevated: rgba(255, 255, 255, 0.82);
+    --bg-pill: #EFEFF4;
+    --bg-hover: rgba(0, 0, 0, 0.04);
+    --label-primary: #1D1D1F;
+    --label-secondary: #515154;
+    --label-tertiary: #86868B;
+    --separator: rgba(0, 0, 0, 0.09);
+    --separator-strong: rgba(0, 0, 0, 0.16);
+    --accent: #0066CC;
+    --accent-soft: rgba(0, 102, 204, 0.10);
+    --status-ok: #1D7D3F;
+    --status-ok-bg: rgba(29, 125, 63, 0.10);
+    --status-warn: #B25000;
+    --status-warn-bg: rgba(178, 80, 0, 0.10);
+    --num-bg: #F2F2F7;
+    --num-text: #1D1D1F;
+    --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-modal: 0 24px 60px rgba(0, 0, 0, 0.18);
+    --teck-logo-bg: #1D1D1F;
+  }
+
+  :root[data-theme="dark"] {
+    --bg-primary: #000000;
+    --bg-secondary: #121214;
+    --bg-tertiary: #1C1C1E;
+    --bg-elevated: rgba(28, 28, 30, 0.78);
+    --bg-pill: #2C2C2E;
+    --bg-hover: rgba(255, 255, 255, 0.05);
+    --label-primary: #F5F5F7;
+    --label-secondary: #A1A1A6;
+    --label-tertiary: #6E6E73;
+    --separator: rgba(255, 255, 255, 0.10);
+    --separator-strong: rgba(255, 255, 255, 0.18);
+    --accent: #0A84FF;
+    --accent-soft: rgba(10, 132, 255, 0.14);
+    --status-ok: #30D158;
+    --status-ok-bg: rgba(48, 209, 88, 0.14);
+    --status-warn: #FF9F0A;
+    --status-warn-bg: rgba(255, 159, 10, 0.14);
+    --num-bg: #242426;
+    --num-text: #E5E5EA;
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.45);
+    --shadow-modal: 0 28px 70px rgba(0, 0, 0, 0.75);
+    --teck-logo-bg: transparent;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--label-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  /* Barra de Navegación Superior Translúcida (Apple Frosted Glass) */
+  .apple-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--bg-elevated);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--separator);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand-cluster {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .brand-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .brand-caption {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--label-tertiary);
+    letter-spacing: 0.01em;
+  }
+
+  .logo-teck {
+    height: 28px;
+    width: auto;
+    background: var(--teck-logo-bg);
+    padding: 3px 8px;
+    border-radius: 6px;
+    object-fit: contain;
+  }
+
+  .logo-geologgia {
+    height: 28px;
+    width: auto;
+    background: #FFFFFF;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    object-fit: contain;
+  }
+
+  .brand-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--separator-strong);
+  }
+
+  /* Segmented Control (Pestañas estilo macOS / iPadOS) */
+  .segmented-control {
+    display: inline-flex;
+    background: var(--bg-pill);
+    padding: 3px;
+    border-radius: 10px;
+    border: 1px solid var(--separator);
+  }
+
+  .seg-btn {
+    border: none;
+    background: transparent;
+    color: var(--label-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: inherit;
+  }
+
+  .seg-btn.active {
+    background: var(--bg-secondary);
+    color: var(--label-primary);
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Botón de cambio de tema Light / Dark */
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--bg-secondary);
+    color: var(--label-primary);
+    border: 1px solid var(--separator-strong);
+    padding: 6px 13px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.18s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+  }
+
+  /* Layout Principal */
+  .layout-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    flex: 1;
+    max-width: 1640px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1024px) {
+    .layout-shell {
+      grid-template-columns: 1fr;
+    }
+    .sidebar {
+      display: none;
+    }
+  }
+
+  /* Sidebar estilo macOS Finder */
+  .sidebar {
+    border-right: 1px solid var(--separator);
+    padding: 20px 12px;
+    background: var(--bg-primary);
+    overflow-y: auto;
+    max-height: calc(100vh - 57px);
+    position: sticky;
+    top: 57px;
+  }
+
+  .sidebar-section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--label-tertiary);
+    padding: 6px 10px;
+  }
+
+  .tree-group {
+    margin-bottom: 6px;
+  }
+
+  .tree-folder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--label-primary);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .tree-folder:hover {
+    background: var(--bg-hover);
+  }
+
+  .folder-badge {
+    font-size: 11px;
+    color: var(--label-tertiary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tree-children {
+    padding-left: 12px;
+    margin-top: 2px;
+  }
+
+  .tree-leaf {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--label-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tree-leaf:hover {
+    background: var(--bg-hover);
+    color: var(--label-primary);
+  }
+
+  /* Contenedor Central */
+  .content-area {
+    padding: 32px 36px 48px;
+  }
+
+  .hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--separator);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .hero-title {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: var(--label-primary);
+  }
+
+  .hero-subtitle {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--label-secondary);
+    max-width: 720px;
+  }
+
+  .roles-strip {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .role-chip {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--separator);
+    color: var(--label-secondary);
+  }
+
+  .role-chip.primary {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 600;
+  }
+
+  /* Grid 2x4 de las 8 Fases (Apple Cards limpias, sin colores estridentes) */
+  .phases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(340px, 1fr));
+    gap: 18px;
+  }
+
+  @media (max-width: 900px) {
+    .phases-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .phase-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--separator);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .phase-card:hover {
+    border-color: var(--separator-strong);
+  }
+
+  .phase-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--separator);
+  }
+
+  .phase-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--label-primary);
+  }
+
+  .phase-range-pill {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--label-tertiary);
+    background: var(--bg-pill);
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.14s ease;
+  }
+
+  .skill-item:hover {
+    background: var(--bg-hover);
+  }
+
+  .skill-index {
+    font-size: 11.5px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    background: var(--num-bg);
+    color: var(--num-text);
+    padding: 2px 7px;
+    border-radius: 6px;
+    min-width: 28px;
+    text-align: center;
+    border: 1px solid var(--separator);
+  }
+
+  .skill-label {
+    font-size: 13.5px;
+    color: var(--label-primary);
+    flex: 1;
+  }
+
+  .gate-pill {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+
+  /* Simulador / Demo Interactiva de Licitaciones Ficticias */
+  .demo-layout {
+    display: grid;
+    grid-template-columns: 310px 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 960px) {
+    .demo-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .demo-selector-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--separator);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: var(--shadow-card);
+    height: fit-content;
+  }
+
+  .demo-item {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: all 0.16s ease;
+  }
+
+  .demo-item:hover {
+    background: var(--bg-hover);
+  }
+
+  .demo-item.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+
+  .demo-code {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .demo-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--label-primary);
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+
+  .demo-client {
+    font-size: 11.5px;
+    color: var(--label-secondary);
+    margin-top: 3px;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  @media (max-width: 780px) {
+    .kpi-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .kpi-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--separator);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .kpi-title {
+    font-size: 11.5px;
+    color: var(--label-tertiary);
+    font-weight: 500;
+  }
+
+  .kpi-number {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--label-primary);
+    margin-top: 4px;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kpi-foot {
+    font-size: 11.5px;
+    color: var(--label-secondary);
+    margin-top: 3px;
+  }
+
+  .apple-table-wrap {
+    background: var(--bg-secondary);
+    border: 1px solid var(--separator);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 18px;
+    overflow-x: auto;
+  }
+
+  table.apple-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  table.apple-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--label-tertiary);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--separator-strong);
+  }
+
+  table.apple-table td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--separator);
+    color: var(--label-primary);
+    vertical-align: top;
+  }
+
+  table.apple-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .badge-status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  .badge-status.ok {
+    color: var(--status-ok);
+    background: var(--status-ok-bg);
+  }
+
+  .badge-status.warn {
+    color: var(--status-warn);
+    background: var(--status-warn-bg);
+  }
+
+  .btn-primary-apple {
+    background: var(--accent);
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+  }
+
+  .btn-primary-apple:hover {
+    opacity: 0.9;
+  }
+
+  /* Modal Estilo macOS Sheet */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.48);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+    padding: 20px;
+  }
+
+  .modal-sheet {
+    background: var(--bg-secondary);
+    border: 1px solid var(--separator-strong);
+    border-radius: 16px;
+    width: min(660px, 95vw);
+    padding: 26px 28px;
+    box-shadow: var(--shadow-modal);
+  }
+
+  .modal-sheet h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--label-primary);
+  }
+
+  .modal-meta {
+    font-size: 12.5px;
+    color: var(--label-secondary);
+    margin-top: 4px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--separator);
+  }
+
+  .modal-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--label-tertiary);
+    margin: 14px 0 6px;
+  }
+
+  .modal-sheet ul, .modal-sheet ol {
+    padding-left: 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--label-primary);
+  }
+
+  .close-pill {
+    float: right;
+    background: var(--bg-pill);
+    border: 1px solid var(--separator);
+    color: var(--label-primary);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  /* Footer Corporativo Oficial */
+  .apple-footer {
+    border-top: 1px solid var(--separator);
+    background: var(--bg-secondary);
+    padding: 20px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--label-tertiary);
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra Superior Translúcida con Logos Oficiales y Controles -->
+<header class="apple-navbar">
+  <div class="brand-cluster">
+    <div class="brand-item">
+      <span class="brand-caption">Desarrollado por</span>
+      <img src="logo-tecknologia.png" alt="Tecknologia" class="logo-teck" />
+    </div>
+    <div class="brand-divider"></div>
+    <div class="brand-item">
+      <span class="brand-caption">Diseñado por</span>
+      <img src="logo-geologgia.png" alt="Geologgia Ltda." class="logo-geologgia" />
+    </div>
+  </div>
+
+  <nav class="segmented-control" aria-label="Vistas principales">
+    <button class="seg-btn active" id="tab-mapa" onclick="switchView('mapa')">50 Habilidades</button>
+    <button class="seg-btn" id="tab-demo" onclick="switchView('demo')">Simulador & Cartera Demo (4)</button>
+    <button class="seg-btn" id="tab-arquitectura" onclick="switchView('arquitectura')">Arquitectura & Privacidad</button>
+  </nav>
+
+  <button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" title="Cambiar entre modo claro y oscuro">
+    <span id="theme-icon">☀️</span>
+    <span id="theme-label">Modo Claro</span>
+  </button>
+</header>
+
+<div class="layout-shell">
+  <!-- Barra Lateral de Exploración de las 50 Skills -->
+  <aside class="sidebar">
+    <div class="sidebar-section-label">Estructura · 50 Habilidades</div>
+    <div id="sidebar-tree"></div>
+  </aside>
+
+  <!-- Área Principal -->
+  <main class="content-area">
+    <!-- VISTA 1: LAS 50 HABILIDADES EN 8 FASES -->
+    <section id="view-mapa">
+      <div class="hero-header">
+        <div>
+          <div class="eyebrow">Ingeniería de Propuestas Asistida por IA</div>
+          <h1 class="hero-title">Equipo de Licitaciones</h1>
+          <p class="hero-subtitle">
+            50 habilidades preconfiguradas y auditables para organizar, costear y controlar todo el ciclo de licitaciones en Geología, Geotecnia, Minería, Construcción y Energía — desde el correo de invitación hasta la firma del Aprobador.
+          </p>
+        </div>
+        <div class="roles-strip">
+          <span class="role-chip">01 · Bid Manager</span>
+          <span class="role-chip">02 · Analista de Bases</span>
+          <span class="role-chip">03 · Especialista Técnico</span>
+          <span class="role-chip">04 · Estimador de Costos</span>
+          <span class="role-chip">05 · Administrativo-Legal</span>
+          <span class="role-chip">06 · Revisor QA</span>
+          <span class="role-chip primary">07 & 08 · Revisor Final y Aprobador</span>
+        </div>
+      </div>
+
+      <div class="phases-grid" id="phases-container"></div>
+    </section>
+
+    <!-- VISTA 2: SIMULADOR INTERACTIVO CON 4 LICITACIONES FICTICIAS DE DEMOSTRACIÓN -->
+    <section id="view-demo" class="hidden">
+      <div class="hero-header">
+        <div>
+          <div class="eyebrow">Entorno de Demostración Interactiva (Datos Ficticios)</div>
+          <h1 class="hero-title">Consola de Cartera y Aprobación</h1>
+          <p class="hero-subtitle">
+            Explora 4 casos simulados de minería subterránea, hidroelectricidad, infraestructura vial y reclamos contractuales (*claims*). Prueba la aprobación de precio en vivo como Revisor Final.
+          </p>
+        </div>
+      </div>
+
+      <div class="demo-layout">
+        <div class="demo-selector-card">
+          <div class="sidebar-section-label" style="padding-left:4px;margin-bottom:8px">Licitaciones de Ejemplo</div>
+          <div id="demo-list"></div>
+        </div>
+        <div id="demo-detail"></div>
+      </div>
+    </section>
+
+    <!-- VISTA 3: ARQUITECTURA, PRIVACIDAD Y DESPLIEGUE -->
+    <section id="view-arquitectura" class="hidden">
+      <div class="hero-header">
+        <div>
+          <div class="eyebrow">Especificaciones Técnicas B2B</div>
+          <h1 class="hero-title">Arquitectura Híbrida y Soberanía de Datos</h1>
+          <p class="hero-subtitle">
+            Separación estricta entre el motor matemático/documental local y la capa de razonamiento LLM configurable según los estándares de confidencialidad de cada mandante.
+          </p>
+        </div>
+      </div>
+
+      <div class="apple-table-wrap">
+        <table class="apple-table">
+          <thead>
+            <tr>
+              <th>Capa del Sistema</th>
+              <th>Dónde se ejecuta</th>
+              <th>Qué procesa</th>
+              <th>Garantía de Confidencialidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Motor Documental y Financiero (Python / .exe)</strong></td>
+              <td>100% Local en el PC/Servidor del Cliente</td>
+              <td>Lectura de correos <code>.eml</code>, descompresión <code>.zip</code>, cálculo de HH y márgenes en <code>costos.xlsx</code>, <code>matriz_cumplimiento.xlsx</code> y armado de <code>propuesta_tecnica.docx</code></td>
+              <td>Las planillas de tarifas, costos internos y utilidades viven en el disco local y no requieren subir a nubes SaaS de terceros.</td>
+            </tr>
+            <tr>
+              <td><strong>2A. Modo Cloud LLM Empresarial (Estándar)</strong></td>
+              <td>API Comercial (Gemini / Claude / OpenAI)</td>
+              <td>Interpretación de Términos de Referencia extensos, redacción metodológica y simulador de evaluación</td>
+              <td>Operación bajo políticas empresariales <em>Zero-Data-Retention</em> (sin entrenamiento sobre datos del cliente).</td>
+            </tr>
+            <tr>
+              <td><strong>2B. Modo Híbrido con Sanitización de Precios</strong></td>
+              <td>Técnica en Cloud LLM + Económica 100% Local</td>
+              <td>El LLM solo lee las bases técnicas públicas; el cálculo económico y el Acta de Aprobación corren solo en CPU local</td>
+              <td>Aísla por completo la estrategia de precios y márgenes respecto de cualquier API externa.</td>
+            </tr>
+            <tr>
+              <td><strong>2C. Modo Air-Gapped (LLM Local)</strong></td>
+              <td>Servidor GPU Interno (Ollama / vLLM)</td>
+              <td>Todo el flujo técnico y económico en red cerrada</td>
+              <td>Operación 100% offline para contratos mineros o de infraestructura crítica con reserva estricta.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Modal Detalle de Habilidad -->
+<div id="skill-modal" class="modal-backdrop hidden" onclick="closeSkillModal()">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="close-pill" onclick="closeSkillModal()">Cerrar ✕</button>
+    <h2 id="m-title"></h2>
+    <div class="modal-meta" id="m-meta"></div>
+    <div class="modal-section-title">Objetivo</div>
+    <p id="m-obj" style="font-size:14px;line-height:1.5"></p>
+    <div class="modal-section-title">Entradas</div>
+    <ul id="m-ent"></ul>
+    <div class="modal-section-title">Pasos de Ejecución</div>
+    <ol id="m-pasos"></ol>
+    <div class="modal-section-title">Entregable Verificable</div>
+    <p id="m-sal" style="font-size:13px;font-weight:600;color:var(--accent)"></p>
+    <div id="m-ctrl-box" class="hidden">
+      <div class="modal-section-title">Punto de Control Humano</div>
+      <p id="m-ctrl" style="font-size:13px;font-weight:600"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer con créditos oficiales -->
+<footer class="apple-footer">
+  <div class="brand-cluster">
+    <div class="brand-item">
+      <span class="brand-caption">Desarrollado por</span>
+      <img src="logo-tecknologia.png" alt="Tecknologia" class="logo-teck" />
+    </div>
+    <div class="brand-divider"></div>
+    <div class="brand-item">
+      <span class="brand-caption">Diseñado por</span>
+      <img src="logo-geologgia.png" alt="Geologgia Ltda." class="logo-geologgia" />
+    </div>
+  </div>
+  <div>BidFactory AI · 50 Habilidades Preconfiguradas para Ingeniería, Geología, Minería, Construcción y Energía</div>
+</footer>
+
+<script>
+const SKILLS = [{"n": 1, "f": 1, "nombre": "Lectura del correo de invitación", "rol": "Bid Manager", "obj": "Detectar correos de invitación, bases, aclaraciones o adendas, y crear la carpeta de la licitación.", "ent": ["Bandeja Gmail (IMAP)", "Correos reenviados o descargados (.eml)"], "pasos": ["Ejecutar `python scripts/leer_correos.py --dias 7` (o `--eml archivo.eml`).", "Clasificar cada correo: invitación nueva / consulta-respuesta / adenda / recordatorio / adjudicación.", "Identificar mandante, código o ID de licitación, nombre del proyecto, plazos mencionados y contacto.", "Si es nueva, crear la estructura con `python scripts/nueva_licitacion.py <CODIGO> \"<Nombre>\" \"<Mandante>\"`.", "Si corresponde a una licitación existente, guardarlo en `correo/` y avisar al Bid Manager qué cambió."], "sal": "`licitaciones/<CODIGO>/correo/` con .eml + adjuntos y entrada en `estado.json`.", "script": "leer_correos.py, nueva_licitacion.py"}, {"n": 2, "f": 1, "nombre": "Descarga y orden de bases y anexos", "rol": "Bid Manager", "obj": "Reunir todos los documentos de la licitación en una estructura estándar y convertirlos a texto analizable.", "ent": ["Adjuntos del correo", "Links a portales (Mercado Público, SAP Ariba, Coupa, portal del mandante)"], "pasos": ["Mover los documentos a `bases/` con nombres normalizados: `BAG_`, `BAE_`, `TDR_`, `ANEXO_NN_`, `PLANO_`, `ADENDA_NN_`.", "Si hay documentos solo en portal, listar en `bases/PENDIENTES.md` lo que el usuario debe descargar manualmente (nunca usar credenciales sin autorización).", "Ejecutar `python scripts/extraer_texto.py <CODIGO>` para generar `analisis/texto/*.txt`.", "Verificar que no falten anexos citados en las bases (buscar 'Anexo N°' en el texto y cruzar con los archivos)."], "sal": "`licitaciones/<CODIGO>/bases/` ordenado + `analisis/texto/` + lista de faltantes.", "script": "extraer_texto.py"}, {"n": 3, "f": 1, "nombre": "Ficha resumen de la licitación", "rol": "Analista de Bases", "obj": "Resumir en una página qué se licita, para quién, cuándo y con qué condiciones clave.", "ent": ["Texto de bases (`analisis/texto/`)"], "pasos": ["Completar `ficha.json` (plantilla en `plantillas/ficha_licitacion.json`): mandante, código, objeto, ubicación, región, modalidad (pública/privada/invitación), tipo de contrato (suma alzada, serie de precios, HH), plazo de ejecución, presupuesto referencial, moneda, garantías, visita a terreno, fecha de cierre.", "Clasificar la disciplina: geología / geotecnia / hidrogeología / minería / túneles / construcción / energía / medio ambiente / claims.", "Redactar un resumen ejecutivo de 5 líneas en `analisis/ficha_resumen.md`."], "sal": "`licitaciones/<CODIGO>/ficha.json` + `analisis/ficha_resumen.md`."}, {"n": 4, "f": 1, "nombre": "Calendario de hitos", "rol": "Bid Manager", "obj": "Ninguna fecha se pierde: visita a terreno, consultas, respuestas, cierre técnico y económico, apertura.", "ent": ["Bases (sección cronograma)", "ficha.json"], "pasos": ["Extraer todas las fechas y horas con su zona horaria (Chile continental).", "Registrar en `ficha.json > hitos` y en `analisis/calendario.md` como tabla.", "Calcular fechas internas hacia atrás: borrador técnico (cierre −5 días hábiles), económico (−4), QA (−3), revisión final (−2), aprobación (−1), envío (cierre −1 día, nunca el último minuto).", "Ofrecer al usuario crear los eventos en su calendario."], "sal": "Calendario con hitos externos + internos.", "control": "Si faltan menos de 5 días hábiles al cierre, marcar la licitación como **URGENTE** en `estado.json`."}, {"n": 5, "f": 1, "nombre": "Registro en la cartera de licitaciones", "rol": "Bid Manager", "obj": "Mantener una vista única de todas las licitaciones activas, enviadas, adjudicadas y perdidas.", "ent": ["ficha.json de cada licitación"], "pasos": ["Ejecutar `python scripts/cartera.py` para regenerar `cartera_licitaciones.xlsx`.", "Verificar estado: RECIBIDA → GO/NO-GO → EN PREPARACION → EN REVISION → APROBADA → ENVIADA → ADJUDICADA/PERDIDA/DESISTIDA."], "sal": "`cartera_licitaciones.xlsx` actualizado.", "script": "cartera.py"}, {"n": 6, "f": 1, "nombre": "Decisión Go/No-Go", "rol": "Bid Manager → Aprobador", "obj": "Decidir con criterios objetivos si vale la pena ofertar antes de invertir horas.", "ent": ["ficha.json", "Requisitos de experiencia (hab. 13)", "Carga actual de trabajo"], "pasos": ["Completar `plantillas/go_no_go.md` en `analisis/go_no_go.md`, puntuando 1–5: fit técnico con Geologgia, experiencia exigible demostrable, disponibilidad de equipo, plazo de preparación, margen esperado, riesgo contractual, relación con el mandante, valor estratégico.", "Calcular puntaje ponderado y recomendar GO (≥3,5), GO CONDICIONADO (2,5–3,5) o NO-GO (<2,5).", "Listar los 3 principales riesgos y qué se necesitaría para mitigarlos."], "sal": "Recomendación Go/No-Go justificada.", "control": "🔴 **PUNTO DE CONTROL HUMANO**: el Aprobador (Carlos) decide. Registrar la decisión en `estado.json`. Sin GO no se avanza."}, {"n": 7, "f": 2, "nombre": "Extracción de requisitos administrativos", "rol": "Analista de Bases", "obj": "Listar cada requisito administrativo/formal exigido, con su fuente exacta.", "ent": ["BAG / bases administrativas"], "pasos": ["Recorrer las bases y extraer cada exigencia: documentos, formatos, firmas, idioma, número de copias, forma de entrega, vigencia de la oferta.", "Para cada uno: ID (ADM-001…), texto literal, documento y numeral/página, si es causal de inadmisibilidad (SÍ/NO).", "Guardar en `analisis/requisitos.json` (formato en `plantillas/requisitos_ejemplo.json`)."], "sal": "Requisitos ADM en `requisitos.json`."}, {"n": 8, "f": 2, "nombre": "Extracción de requisitos técnicos (TdR)", "rol": "Analista de Bases + Especialista Técnico", "obj": "Desglosar el alcance técnico en requisitos verificables.", "ent": ["TdR / bases técnicas / especificaciones / planos"], "pasos": ["Extraer alcance, actividades, cantidades (m de sondaje, n° de ensayos, km de mapeo, calicatas), normas exigidas (NCh, ASTM, ISRM, NCh433, DS61, ICOLD, etc.), entregables, formatos (shapefile, DWG, informe), plazos parciales.", "ID TEC-001…, texto literal, referencia, criticidad.", "Marcar requisitos que exigen equipos o subcontratos (perforación, laboratorio, geofísica, topografía)."], "sal": "Requisitos TEC en `requisitos.json`."}, {"n": 9, "f": 2, "nombre": "Matriz de cumplimiento", "rol": "Analista de Bases", "obj": "Una sola tabla que demuestra que la oferta responde a TODO lo exigido.", "ent": ["`analisis/requisitos.json` (hab. 7, 8, 10–13)"], "pasos": ["Ejecutar `python scripts/matriz_cumplimiento.py <CODIGO>`.", "Se genera `analisis/matriz_cumplimiento.xlsx` con hojas: Matriz, Resumen, Criterios de evaluación.", "Cada requisito tendrá: responsable, documento de la oferta donde se responde, estado (Pendiente / En curso / Cumple / Cumple con desviación / No cumple) y observaciones.", "La matriz es el documento vivo del proceso: se actualiza en las hab. 19, 41 y 47."], "sal": "`matriz_cumplimiento.xlsx`.", "script": "matriz_cumplimiento.py"}, {"n": 10, "f": 2, "nombre": "Criterios de evaluación y ponderaciones", "rol": "Analista de Bases", "obj": "Entender cómo se gana: qué puntúa y cuánto.", "ent": ["Bases (pauta de evaluación)"], "pasos": ["Extraer criterios, subcriterios, ponderaciones, fórmulas (ej. precio: Pmin/Pi × 100) y puntajes mínimos técnicos.", "Registrar en `requisitos.json > criterios`.", "Indicar en qué sección de la propuesta se gana cada punto y la estrategia (ej. 'experiencia del jefe de proyecto vale 20 %: usar CV más fuerte')."], "sal": "Tabla de criterios + estrategia de puntaje."}, {"n": 11, "f": 2, "nombre": "Garantías y seguros exigidos", "rol": "Administrativo-Legal", "obj": "Identificar a tiempo garantías y seguros (requieren gestión bancaria con días de anticipación).", "ent": ["Bases administrativas", "Borrador de contrato"], "pasos": ["Extraer: garantía de seriedad (monto, glosa exacta, beneficiario, RUT, vigencia, instrumento aceptado: boleta, vale vista, póliza, certificado de fianza), garantía de fiel cumplimiento, anticipo, seguros RC / accidentes.", "Registrar como requisitos ADM críticos.", "Generar `analisis/garantias.md` con instrucciones listas para el banco o la aseguradora."], "sal": "Ficha de garantías.", "control": "Si la garantía de seriedad no se puede emitir antes del cierre, alertar de inmediato (riesgo de inadmisibilidad)."}, {"n": 12, "f": 2, "nombre": "Riesgos contractuales", "rol": "Administrativo-Legal", "obj": "Detectar cláusulas que puedan hacer que el contrato pierda plata o genere conflictos.", "ent": ["Borrador de contrato", "Bases administrativas"], "pasos": ["Revisar: multas (tope % del contrato), responsabilidad ilimitada, retenciones, plazo de pago (>30 días), reajustabilidad, propiedad intelectual de datos geológicos, confidencialidad, término anticipado, condiciones de terreno imprevistas (riesgo geológico asignado al consultor), órdenes de cambio, solución de controversias.", "Clasificar cada riesgo Alto/Medio/Bajo con impacto estimado.", "Proponer acción: aceptar, preguntar en consultas (hab. 15), costear (hab. 34) o declarar desviación."], "sal": "`analisis/riesgos_contractuales.md`."}, {"n": 13, "f": 2, "nombre": "Requisitos de experiencia y equipo mínimo", "rol": "Analista de Bases", "obj": "Verificar si Geologgia y su equipo cumplen la experiencia y los perfiles exigidos.", "ent": ["Bases", "`base_conocimiento/experiencia_geologgia.md`", "`base_conocimiento/equipo/`"], "pasos": ["Extraer experiencia de la empresa (n° de proyectos, montos, años, tipo, cómo se acredita: certificados del mandante, contratos, facturas).", "Extraer perfiles: profesión, años de experiencia, especialidad, certificaciones (ej. Persona Competente CCRR), dedicación.", "Cruzar con la base de conocimiento y marcar brechas.", "Si hay brechas: proponer consorcio, subcontrato o profesional externo."], "sal": "Tabla experiencia y equipo: Cumple / Brecha."}, {"n": 14, "f": 3, "nombre": "Detección de ambigüedades y vacíos", "rol": "Analista de Bases + Especialista Técnico", "obj": "Encontrar lo que no está claro antes de que sea un problema en la oferta o en el contrato.", "ent": ["requisitos.json", "riesgos_contractuales.md"], "pasos": ["Buscar: contradicciones entre documentos, cantidades sin definir, información geológica de base faltante (sondajes previos, estudios anteriores, acceso), criterios sin fórmula, plazos imposibles, responsabilidades indefinidas (permisos, accesos, servidumbres, agua, energía en faena).", "Listar cada hallazgo con referencia y por qué importa (impacto en precio, plazo o riesgo)."], "sal": "`consultas/hallazgos.md`."}, {"n": 15, "f": 3, "nombre": "Redacción de preguntas al mandante", "rol": "Analista de Bases", "obj": "Formular preguntas claras, neutrales y que no revelen la estrategia de Geologgia a la competencia.", "ent": ["consultas/hallazgos.md"], "pasos": ["Por cada hallazgo, redactar una pregunta con el formato: referencia (documento, numeral, página) + cita breve + pregunta cerrada o con opciones.", "Evitar preguntas que expongan la metodología o ventajas propias (las respuestas son públicas para todos los oferentes).", "Priorizar: críticas (afectan precio o admisibilidad) primero.", "Generar `consultas/preguntas_ronda_N.md` y, si el mandante exige formato, el Excel/Word correspondiente."], "sal": "Listado de preguntas listo para enviar."}, {"n": 16, "f": 3, "nombre": "Envío y registro de consultas", "rol": "Bid Manager → Aprobador", "obj": "Enviar las consultas dentro de plazo por el canal correcto y dejar evidencia.", "ent": ["preguntas_ronda_N.md"], "pasos": ["Confirmar canal: foro de Mercado Público, portal privado o correo al contacto oficial (nunca a contactos no autorizados en las bases).", "Preparar borrador del correo con `python scripts/leer_correos.py --borrador-consultas <CODIGO> <N>` (crea un .eml, no envía).", "Tras el envío por el usuario, guardar comprobante en `consultas/` y registrar fecha en `estado.json`."], "sal": "Consultas enviadas + comprobante.", "control": "🔴 **PUNTO DE CONTROL HUMANO**: el Aprobador revisa y envía. La IA nunca envía correos al mandante por sí sola."}, {"n": 17, "f": 3, "nombre": "Lectura de respuestas y aclaraciones", "rol": "Analista de Bases", "obj": "Incorporar todas las respuestas del mandante, incluidas las de preguntas de otros oferentes.", "ent": ["Documento de respuestas / foro / correo"], "pasos": ["Guardar el documento en `consultas/respuestas_ronda_N.*`.", "Para cada respuesta: indicar qué requisito, cantidad o criterio cambia.", "Prestar especial atención a respuestas que modifican el alcance o el plazo."], "sal": "`consultas/impacto_respuestas.md`."}, {"n": 18, "f": 3, "nombre": "Control de adendas y cambios a las bases", "rol": "Bid Manager", "obj": "Que ninguna adenda pase desapercibida y la oferta se arme sobre la versión vigente.", "ent": ["Adendas (correo / portal)"], "pasos": ["Registrar cada adenda: número, fecha, documentos modificados, cambios.", "Si cambia fechas, actualizar el calendario (hab. 4).", "Verificar si la adenda debe ser firmada o declarada como recibida en la oferta."], "sal": "`consultas/registro_adendas.md`."}, {"n": 19, "f": 3, "nombre": "Actualización de la matriz tras aclaraciones", "rol": "Analista de Bases", "obj": "Mantener la matriz de cumplimiento al día con respuestas y adendas.", "ent": ["impacto_respuestas.md", "registro_adendas.md"], "pasos": ["Actualizar `requisitos.json` (agregar, modificar o anular requisitos, citando la fuente: 'Adenda 2, resp. 14').", "Regenerar la matriz: `python scripts/matriz_cumplimiento.py <CODIGO>` (conserva estados ya ingresados)."], "sal": "Matriz actualizada.", "script": "matriz_cumplimiento.py"}, {"n": 20, "f": 4, "nombre": "Comprensión del problema y contexto geológico", "rol": "Especialista Técnico", "obj": "Demostrar al evaluador que entendimos el proyecto y su geología mejor que la competencia.", "ent": ["Ficha", "TdR", "Información pública: cartas geológicas SERNAGEOMIN, DEM ALOS PALSAR, SEIA, estudios previos"], "pasos": ["Describir ubicación, accesos, clima, altitud y condiciones de faena.", "Resumir el marco geológico regional y local (unidades, estructuras, alteración, geomorfología, peligros geológicos, sismicidad).", "Identificar los desafíos técnicos clave del proyecto y cómo los abordaremos.", "Redactar en `propuesta/secciones/01_comprension.md`."], "sal": "Sección de comprensión del problema."}, {"n": 21, "f": 4, "nombre": "Metodología", "rol": "Especialista Técnico", "obj": "Describir cómo se ejecutará cada actividad del alcance, con normas y controles.", "ent": ["Requisitos TEC", "Criterios de evaluación"], "pasos": ["Una subsección por actividad del TdR, en el mismo orden y numeración que el TdR (facilita la evaluación).", "Para cada actividad: objetivo, método (mapeo geológico-estructural, logueo de sondajes, geotecnia RMR/Q/GSI, ensayos de laboratorio, geofísica, hidrogeología, modelamiento 3D, etc.), normas, equipos, control de calidad y entregable.", "Incluir valor agregado sin costo extra cuando aporte puntaje (ej. visor web, modelo 3D).", "Redactar en `propuesta/secciones/02_metodologia.md`."], "sal": "Sección de metodología."}, {"n": 22, "f": 4, "nombre": "Plan de trabajo y Carta Gantt", "rol": "Especialista Técnico + Bid Manager", "obj": "Mostrar un plan realista que cumple el plazo exigido.", "ent": ["Metodología", "Plazo de las bases"], "pasos": ["Definir actividades, duraciones, dependencias e hitos de entregables.", "Registrar en `propuesta/gantt.csv` (actividad, inicio_semana, duracion_semanas, responsable).", "`armar_propuesta.py` lo convierte en una tabla Gantt en el Word.", "Verificar coherencia con HH (hab. 30) y con la ventana climática (invierno altiplánico, nieve en cordillera)."], "sal": "Gantt + texto del plan de trabajo.", "script": "armar_propuesta.py"}, {"n": 23, "f": 4, "nombre": "Organigrama y equipo propuesto", "rol": "Bid Manager", "obj": "Presentar un equipo que cumpla los perfiles mínimos y maximice el puntaje.", "ent": ["Hab. 13", "base_conocimiento/equipo/"], "pasos": ["Asignar cada perfil exigido a una persona; indicar rol, dedicación (%) y años de experiencia.", "Registrar en `propuesta/equipo.csv`.", "Confirmar disponibilidad real y cartas de compromiso si las bases las exigen."], "sal": "Tabla de equipo + organigrama."}, {"n": 24, "f": 4, "nombre": "Adaptación de CVs al formato exigido", "rol": "Bid Manager", "obj": "CVs que destaquen exactamente lo que se evalúa.", "ent": ["CVs base", "Formato de CV del mandante (anexo)"], "pasos": ["Usar el formato del mandante si existe; si no, el formato estándar de Geologgia.", "Ordenar experiencia por relevancia para ESTA licitación, con meses/años computables.", "Verificar coherencia: fechas que no se traslapan de forma imposible, títulos y certificaciones respaldados."], "sal": "CVs en `propuesta/cvs/`.", "control": "No inventar ni inflar experiencia. Todo debe ser verificable."}, {"n": 25, "f": 4, "nombre": "Experiencia y referencias", "rol": "Bid Manager", "obj": "Acreditar experiencia relevante con el formato y respaldo exigidos.", "ent": ["base_conocimiento/experiencia_geologgia.md", "Certificados de clientes"], "pasos": ["Seleccionar los proyectos más afines (disciplina, tamaño, mandante, región).", "Completar el anexo de experiencia del mandante: cliente, proyecto, año, monto, duración, contacto de referencia.", "Adjuntar certificados de experiencia; listar los faltantes para solicitarlos con tiempo."], "sal": "Anexo de experiencia + respaldos.", "control": "Solo experiencia real y acreditable de Geologgia o del profesional."}, {"n": 26, "f": 4, "nombre": "Plan HSE / SSOMA", "rol": "Especialista Técnico", "obj": "Cumplir los requisitos de seguridad, salud y medio ambiente del mandante.", "ent": ["Reglamento especial de empresas contratistas (REECC) del mandante", "Bases"], "pasos": ["Identificar peligros: trabajo en altura geográfica (DS594, hipobaria intermitente crónica), conducción en caminos mineros, taludes y caída de rocas, sondajes, animales, clima extremo, aislamiento.", "Describir controles, EPP, capacitaciones, exámenes ocupacionales y plan de emergencia.", "Incluir indicadores (tasa de frecuencia/gravedad) si se solicitan."], "sal": "`propuesta/secciones/04_hse.md`."}, {"n": 27, "f": 4, "nombre": "Plan de calidad y entregables", "rol": "Especialista Técnico", "obj": "Asegurar al mandante que los datos y entregables serán confiables y trazables.", "ent": ["TdR (entregables)"], "pasos": ["QA/QC de datos: blancos, duplicados y estándares (si hay muestreo), revisión de logueos, control topográfico, validación de bases de datos.", "Lista de entregables con formato (PDF, DWG, SHP, GPKG, Excel, modelo 3D) y fecha.", "Proceso de revisión interna antes de cada entrega."], "sal": "`propuesta/secciones/05_calidad.md`."}, {"n": 28, "f": 4, "nombre": "Mapas y figuras técnicas", "rol": "Especialista Técnico", "obj": "Figuras que comunican competencia técnica: ubicación, geología, plan de trabajo en terreno.", "ent": ["Coordenadas del proyecto", "DEM", "Cartas geológicas"], "pasos": ["Mapa de ubicación y accesos.", "Mapa geológico regional/local con fuente citada (SERNAGEOMIN).", "Plano de distribución propuesta de sondajes, calicatas, perfiles geofísicos o estaciones de mapeo.", "Usar las skills `qgis-agent`, `terrain-analysis-dem` o `alos-palsar-12-5m` cuando aplique.", "Guardar PNG a 300 dpi en `propuesta/figuras/`."], "sal": "Figuras listas para la propuesta."}, {"n": 29, "f": 5, "nombre": "Desglose de actividades (EDT)", "rol": "Estimador de Costos", "obj": "Estructurar el costo en la misma lógica que el alcance y el formulario del mandante.", "ent": ["TdR", "Formulario económico del mandante", "Metodología"], "pasos": ["Crear la EDT con las partidas del formulario del mandante (si existe) o según el TdR.", "Para cada partida: unidad (gl, m, un, HH, día) y cantidad.", "Registrar en `propuesta/economica/costos.xlsx` (generado con `python scripts/plantilla_costos.py <CODIGO>`)."], "sal": "EDT con cantidades.", "script": "plantilla_costos.py"}, {"n": 30, "f": 5, "nombre": "Estimación de HH por rol", "rol": "Estimador de Costos", "obj": "Calcular las horas profesionales necesarias de forma realista.", "ent": ["EDT", "Gantt", "Equipo propuesto"], "pasos": ["Asignar HH por partida y rol (jefe de proyecto, geólogo senior, geólogo junior, geotécnico, SIG, dibujante, técnico de terreno).", "Usar las tarifas de `base_conocimiento/tarifas.md` (UF/HH o CLP/HH).", "Verificar coherencia con la dedicación declarada en el equipo y con el Gantt."], "sal": "Hoja HH de `costos.xlsx`."}, {"n": 31, "f": 5, "nombre": "Costos directos", "rol": "Estimador de Costos", "obj": "Costear todo lo que no es HH: terreno, subcontratos, laboratorio, equipos.", "ent": ["EDT", "Cotizaciones de proveedores"], "pasos": ["Sondajes (diamantina/aire reverso: $/m por diámetro y profundidad, movilización, plataformas, agua).", "Laboratorio (UCS, triaxial, corte directo, carga puntual, mecánica de suelos, químicos, petrografía).", "Geofísica, topografía, drones.", "Terreno: camionetas 4x4, combustible, alojamiento, alimentación, pasajes, exámenes de altura, inducciones, EPP.", "Software y licencias, impresión y courier.", "Registrar proveedor, n° de cotización y vigencia de cada precio."], "sal": "Hoja de costos directos.", "control": "Pedir cotizaciones formales para todo ítem > 10 % del costo total."}, {"n": 32, "f": 5, "nombre": "Gastos generales y utilidad", "rol": "Estimador de Costos", "obj": "Completar el precio con GG, imprevistos, costos financieros y utilidad.", "ent": ["Costos directos + HH"], "pasos": ["GG: administración, seguros, costo de garantías, gestión de la oferta.", "Contingencia según riesgo (hab. 12): 3–15 %.", "Costo financiero si el plazo de pago es largo.", "Utilidad objetivo según `base_conocimiento/tarifas.md`."], "sal": "Resumen de precio en `costos.xlsx`."}, {"n": 33, "f": 5, "nombre": "Formulario económico del mandante", "rol": "Estimador de Costos", "obj": "Traspasar el precio al formato oficial sin errores.", "ent": ["costos.xlsx", "Formulario oficial"], "pasos": ["Completar el formulario exactamente como se exige (moneda, IVA incluido o no, decimales, reajustabilidad).", "Verificar sumas y que cada precio unitario × cantidad = total.", "Comprobar que el total coincide con `costos.xlsx` y que no supera el presupuesto referencial/máximo."], "sal": "Formulario económico completo.", "control": "Un error aritmético o de moneda puede dejar la oferta fuera de bases."}, {"n": 34, "f": 5, "nombre": "Análisis de sensibilidad y precio objetivo", "rol": "Estimador de Costos → Aprobador", "obj": "Definir el precio con conocimiento del margen, del riesgo y de la competencia.", "ent": ["costos.xlsx", "Criterios de evaluación (fórmula de precio)", "Historial de adjudicaciones (Mercado Público)"], "pasos": ["Escenarios: precio mínimo (costo + utilidad mínima), objetivo y agresivo.", "Simular el puntaje económico con la fórmula de las bases frente a precios probables de la competencia.", "Analizar la sensibilidad a ±20 % en metros de sondaje, días de terreno y tipo de cambio.", "Recomendar un precio en `revision/precio_recomendado.md`."], "sal": "Recomendación de precio.", "control": "🔴 El precio final lo decide el Aprobador (hab. 48)."}, {"n": 35, "f": 5, "nombre": "Coherencia técnico-económica", "rol": "Estimador de Costos + Especialista Técnico", "obj": "Que lo que se promete técnicamente esté costeado, y nada costeado falte en la técnica.", "ent": ["Propuesta técnica", "costos.xlsx", "Gantt", "Equipo"], "pasos": ["Cruzar: cada actividad de la metodología tiene partida de costo; cada profesional del equipo tiene HH; las duraciones del Gantt son consistentes con los días de terreno costeados; las cantidades (m, ensayos) coinciden.", "Listar las inconsistencias y corregirlas."], "sal": "`revision/coherencia_tec_eco.md`."}, {"n": 36, "f": 6, "nombre": "Checklist de anexos administrativos", "rol": "Administrativo-Legal", "obj": "Tener cada anexo administrativo completo, firmado y en el formato exigido.", "ent": ["Requisitos ADM", "Anexos del mandante"], "pasos": ["Copiar `plantillas/checklist_administrativo.md` a `propuesta/administrativa/checklist.md` y adaptarlo a esta licitación.", "Completar los datos de la empresa desde `base_conocimiento/empresa.md` (razón social, RUT, domicilio, representante legal).", "Marcar el estado de cada anexo."], "sal": "Checklist administrativo."}, {"n": 37, "f": 6, "nombre": "Declaraciones juradas", "rol": "Administrativo-Legal", "obj": "Preparar las declaraciones exigidas (inhabilidades, conflictos de interés, prácticas antisindicales, Ley 20.393, etc.).", "ent": ["Formatos del mandante"], "pasos": ["Usar siempre el formato del mandante, sin modificar el texto.", "Completar los datos y dejar listo para firma del representante legal (simple, notarial o electrónica avanzada según se exija)."], "sal": "Declaraciones listas para firma."}, {"n": 38, "f": 6, "nombre": "Garantía de seriedad de la oferta", "rol": "Administrativo-Legal", "obj": "Obtener la garantía con la glosa y vigencia exactas.", "ent": ["analisis/garantias.md"], "pasos": ["Solicitar al banco/aseguradora con la glosa literal, monto, beneficiario y vigencia.", "Al recibirla, verificar letra por letra contra las bases.", "Escanear y guardar; coordinar la entrega física si se exige."], "sal": "Garantía verificada.", "control": "Revisión doble obligatoria: un error en la glosa o en la vigencia descalifica."}, {"n": 39, "f": 6, "nombre": "Certificados vigentes", "rol": "Administrativo-Legal", "obj": "Tener al día los certificados societarios, laborales y de registro.", "ent": ["Requisitos ADM"], "pasos": ["Verificar vigencia (días máximos desde emisión): certificado de vigencia de la sociedad, F30 / F30-1, Registro de Proveedores ChileProveedores, REGIC/registros de mandantes mineros (SICEP, Achilles/RedSicep), certificado de deuda TGR, balances.", "Registrar en `base_conocimiento/certificados.md` con fecha de emisión y vencimiento."], "sal": "Certificados vigentes en `propuesta/administrativa/`."}, {"n": 40, "f": 6, "nombre": "Control de firmas y formatos", "rol": "Administrativo-Legal", "obj": "Que cada documento esté firmado, foliado y en el formato correcto.", "ent": ["Todos los documentos de la oferta"], "pasos": ["Verificar firmas (quién, tipo de firma), formato de archivo (PDF, tamaño máximo por archivo en el portal), nombre de archivo exigido, foliado si corresponde.", "Separar sobres: administrativo / técnico / económico (nunca precio en el sobre técnico)."], "sal": "Paquete de documentos listo para QA.", "control": "Verificar que el precio NO aparezca en la oferta técnica."}, {"n": 41, "f": 7, "nombre": "Revisión de cumplimiento vs. matriz", "rol": "Revisor QA", "obj": "Confirmar que cada requisito de la matriz está respondido y localizable.", "ent": ["matriz_cumplimiento.xlsx", "Documentos de la oferta"], "pasos": ["Para cada requisito, abrir el documento indicado y verificar que la respuesta existe y es suficiente.", "Actualizar el estado a Cumple / Cumple con desviación / No cumple.", "Cualquier 'No cumple' de un requisito causal de inadmisibilidad bloquea el envío."], "sal": "Matriz con 100 % revisado.", "script": "matriz_cumplimiento.py --resumen"}, {"n": 42, "f": 7, "nombre": "Revisión técnica par", "rol": "Revisor QA (con perfil técnico)", "obj": "Una segunda mirada técnica crítica a la propuesta.", "ent": ["propuesta/secciones/*.md", "Propuesta Word"], "pasos": ["Revisar: solidez técnica, normas correctas, terminología geológica precisa, coherencia entre secciones, que no haya texto copiado de otra licitación (otro mandante, otro proyecto).", "Registrar observaciones en `revision/observaciones_tecnicas.md` (sección, observación, severidad, propuesta)."], "sal": "Observaciones técnicas."}, {"n": 43, "f": 7, "nombre": "Revisión económica", "rol": "Revisor QA", "obj": "Verificar aritmética, consistencia y razonabilidad del precio.", "ent": ["costos.xlsx", "Formulario económico"], "pasos": ["Recalcular totales; revisar IVA, moneda, UF del día, decimales.", "Comparar ratios con licitaciones anteriores ($/m de sondaje, HH totales/MUSD, % de terreno).", "Revisar que toda cotización esté vigente al inicio estimado del contrato."], "sal": "`revision/observaciones_economicas.md`."}, {"n": 44, "f": 7, "nombre": "Revisión legal-contractual", "rol": "Revisor QA", "obj": "Confirmar que la oferta no asume riesgos no evaluados ni incluye condiciones que la invaliden.", "ent": ["riesgos_contractuales.md", "Oferta completa"], "pasos": ["Verificar que las desviaciones declaradas estén permitidas por las bases (muchas bases rechazan ofertas condicionadas).", "Revisar vigencia de la oferta, glosa de la garantía, poderes del firmante."], "sal": "`revision/observaciones_legales.md`."}, {"n": 45, "f": 7, "nombre": "Evaluador simulado", "rol": "Revisor QA", "obj": "Puntuar la oferta como lo haría la comisión evaluadora del mandante, antes de enviarla.", "ent": ["Criterios de evaluación (hab. 10)", "Oferta completa"], "pasos": ["Adoptar el rol de un evaluador exigente del mandante que no conoce a Geologgia.", "Puntuar cada criterio y subcriterio con justificación y citas a la oferta.", "Identificar dónde se pierden puntos y qué cambio concreto los recuperaría.", "Estimar el puntaje técnico total y si supera el mínimo."], "sal": "`revision/evaluacion_simulada.md` con puntaje y mejoras."}, {"n": 46, "f": 7, "nombre": "Corrección de estilo, formato y foliado", "rol": "Revisor QA", "obj": "Una oferta impecable: sin errores ortográficos, con formato consistente y profesional.", "ent": ["Word final"], "pasos": ["Regenerar el Word con `python scripts/armar_propuesta.py <CODIGO>`.", "Revisar ortografía, numeración de secciones, figuras y tablas, índice, encabezados con nombre de la licitación, logos.", "Verificar que no queden marcadores `[COMPLETAR]`, `TODO` o nombres de otros mandantes (`armar_propuesta.py --verificar`)."], "sal": "Propuesta técnica final (DOCX/PDF).", "script": "armar_propuesta.py --verificar"}, {"n": 47, "f": 8, "nombre": "Informe al Revisor Final", "rol": "Bid Manager → Revisor Final", "obj": "Darle al Revisor Final todo lo necesario para decidir en 15 minutos.", "ent": ["Matriz", "Observaciones QA", "Evaluación simulada", "Precio recomendado"], "pasos": ["Ejecutar `python scripts/informe_aprobacion.py <CODIGO>` → `revision/informe_revisor_final.docx`.", "Contenido: resumen de la licitación, estado de cumplimiento (% y pendientes), puntaje técnico simulado, precio y margen por escenario, riesgos principales, desviaciones declaradas, observaciones QA abiertas, checklist de envío.", "Recomendación clara: APROBAR / APROBAR CON CAMBIOS / NO ENVIAR."], "sal": "Informe para el Revisor Final.", "script": "informe_aprobacion.py", "control": "🔴 **PUNTO DE CONTROL HUMANO — REVISOR FINAL (Carlos)**: revisa el informe, pide cambios o da el visto bueno."}, {"n": 48, "f": 8, "nombre": "Aprobación y registro de la decisión", "rol": "Aprobador", "obj": "Dejar registro formal de quién aprobó qué, cuándo y con qué precio.", "ent": ["Informe al Revisor Final"], "pasos": ["El Aprobador indica: decisión, precio final aprobado, condiciones.", "Registrar con `python scripts/informe_aprobacion.py <CODIGO> --aprobar --precio <MONTO> --por \"<Nombre>\"`.", "Se guarda en `estado.json > aprobacion` y en `revision/acta_aprobacion.md` con fecha y hora."], "sal": "Acta de aprobación.", "control": "🔴 **PUNTO DE CONTROL HUMANO — APROBADOR (Carlos)**. Sin acta no hay envío."}, {"n": 49, "f": 8, "nombre": "Envío / carga de la oferta", "rol": "Bid Manager + Aprobador", "obj": "Ingresar la oferta completa, a tiempo, y con comprobante.", "ent": ["Paquete final", "Acta de aprobación"], "pasos": ["Verificar que existe `revision/acta_aprobacion.md`.", "Checklist final: archivos por sobre, tamaños, nombres, garantía física (si aplica), hora de cierre.", "El usuario sube la oferta al portal o envía el correo (la IA prepara el borrador, no envía).", "Guardar comprobante de recepción en `envio/` y cambiar el estado a ENVIADA."], "sal": "Comprobante de envío.", "control": "Enviar con al menos 24 h de margen. Los portales colapsan cerca del cierre."}, {"n": 50, "f": 8, "nombre": "Seguimiento de adjudicación y lecciones aprendidas", "rol": "Bid Manager", "obj": "Aprender de cada licitación, se gane o se pierda.", "ent": ["Acta de apertura/adjudicación", "Precios de la competencia"], "pasos": ["Registrar resultado, puntajes y precios de todos los oferentes (si son públicos).", "Si se pierde: solicitar retroalimentación al mandante.", "Escribir `envio/lecciones_aprendidas.md`: qué funcionó, qué no, qué cambiar.", "Actualizar `base_conocimiento/` (tarifas, experiencia, precios de competencia) y la cartera."], "sal": "Lecciones aprendidas + base de conocimiento actualizada.", "script": "cartera.py"}];
+const FASES = [{"id": 1, "carpeta": "01-recepcion-triaje", "titulo": "I · Recepción y triaje"}, {"id": 2, "carpeta": "02-analisis-bases", "titulo": "II · Análisis de bases"}, {"id": 3, "carpeta": "03-consultas-aclaraciones", "titulo": "III · Consultas y aclaraciones"}, {"id": 4, "carpeta": "04-propuesta-tecnica", "titulo": "IV · Propuesta técnica"}, {"id": 5, "carpeta": "05-propuesta-economica", "titulo": "V · Propuesta económica"}, {"id": 6, "carpeta": "06-documentacion-legal", "titulo": "VI · Documentación legal-administrativa"}, {"id": 7, "carpeta": "07-revision-qa", "titulo": "VII · Revisión y control de calidad"}, {"id": 8, "carpeta": "08-aprobacion-envio", "titulo": "VIII · Aprobación, envío y post-licitación"}];
+const DEMOS = [{"codigo": "DEMO-MIN-2026", "nombre": "Estudio Geotécnico e Hidrogeológico para Caverna de Chancado Subterráneo y Piques de Ventilación", "mandante": "Compañía Minera Cumbre Andina S.A. (Ejemplo Demo)", "portal": "SAP Ariba Enterprise", "modalidad": "Suma Alzada en UF (Dos Sobres)", "ubicacion": "Faena Alta Cordillera, Región de Antofagasta (3.850 m s.n.m.)", "cierre": "2026-12-04 15:00", "estado_global": "APROBADA PARA ENVÍO", "go_no_go_nota": "4.75 / 5.00 (GO)", "puntaje_simulado": 96.8, "cumplimiento_pct": 100, "inadmisibilidad_pendientes": 0, "plazo_semanas": 12, "hh_totales": 620, "escenarios": {"costo_directo": 1140.0, "agresivo": 1468.32, "objetivo": 1587.34, "conservador": 1738.5, "aprobado": 1580.0}, "revisor_final": "Director Técnico / Socio Aprobador", "requisitos": [{"id": "ADM-001", "cat": "Administrativo", "req": "Boleta de Garantía de Seriedad por 300 UF vigencia 90 días", "fuente": "BAG Numeral 8.1", "inadm": true, "estado": "Cumple"}, {"id": "ADM-002", "cat": "Administrativo", "req": "Certificado F30 y Declaración Ley 20.393 firmada", "fuente": "BAG Anexo A-2", "inadm": true, "estado": "Cumple"}, {"id": "TEC-001", "cat": "Técnico", "req": "Logueo geotécnico de 800 m de sondajes orientados HQ3 y caracterización RMR89, Q y GSI", "fuente": "TdR Cap. 4.2", "inadm": true, "estado": "Cumple"}, {"id": "TEC-002", "cat": "Técnico", "req": "Modelamiento numérico tridimensional de esfuerzos y fortificación de caverna", "fuente": "TdR Cap. 4.5", "inadm": true, "estado": "Cumple"}, {"id": "EXP-001", "cat": "Experiencia", "req": "Jefe de Proyecto con +15 años en obras subterráneas mineras o hidroeléctricas", "fuente": "BAE Numeral 5.3", "inadm": true, "estado": "Cumple"}, {"id": "ECO-001", "cat": "Económico", "req": "Formulario Económico E-1 desglosado por partida sin filtración en sobre técnico", "fuente": "BAE Anexo E-1", "inadm": true, "estado": "Cumple"}]}, {"codigo": "DEMO-ENE-2026", "nombre": "Actualización de Estudio de Peligros Geológicos y Forzante de Cambio Climático en Central Hidroeléctrica", "mandante": "Austral Generación Renovable SpA (Ejemplo Demo)", "portal": "Invitación Directa + Data Room", "modalidad": "Suma Alzada por Hitos", "ubicacion": "Cuenca Cordillerana Zona Central, Chile (1.900 m s.n.m.)", "cierre": "2026-11-28 18:00", "estado_global": "EN REVISIÓN FINAL (HAB. 47)", "go_no_go_nota": "4.80 / 5.00 (GO)", "puntaje_simulado": 96.5, "cumplimiento_pct": 100, "inadmisibilidad_pendientes": 0, "plazo_semanas": 10, "hh_totales": 442, "escenarios": {"costo_directo": 812.75, "agresivo": 1046.82, "objetivo": 1131.67, "conservador": 1239.44, "aprobado": 1130.0}, "revisor_final": "Director Técnico / Socio Aprobador", "requisitos": [{"id": "TEC-001", "cat": "Técnico", "req": "Alcance detallado en 5 etapas incluyendo campaña geomorfológica en terreno", "fuente": "Solicitud RFQ Párr. 2", "inadm": true, "estado": "Cumple"}, {"id": "TEC-002", "cat": "Técnico", "req": "Modelación de ascenso de isoterma 0°C y lluvias extremas (ARCliM / CMIP6)", "fuente": "Solicitud RFQ Párr. 1", "inadm": true, "estado": "Cumple"}, {"id": "TEC-003", "cat": "Técnico", "req": "Atlas de Peligro (Escenario Histórico vs Cambio Climático) y Geodatabase SIG (.gpkg)", "fuente": "Solicitud RFQ Párr. 2", "inadm": true, "estado": "Cumple"}, {"id": "TEC-004", "cat": "Técnico", "req": "Fichas operacionales de vulnerabilidad y riesgo por activo (bocatoma, canal, casa de máquinas)", "fuente": "TdR Sección 5", "inadm": false, "estado": "Cumple"}, {"id": "ECO-001", "cat": "Económico", "req": "Cuadro económico en UF y supuestos operacionales de acceso", "fuente": "Solicitud RFQ Párr. 2", "inadm": true, "estado": "Cumple"}]}, {"codigo": "DEMO-INF-2026", "nombre": "Ingeniería Geológica-Geotécnica de Detalle para Portales y Soporte NATM de Túnel Vial (3,6 km)", "mandante": "Sociedad Concesionaria Vial Cordillera S.A. (Ejemplo Demo)", "portal": "Mercado Público / MOP", "modalidad": "Serie de Precios Unitarios + Suma Alzada", "ubicacion": "Tramo Cordillerano Ruta Internacional, Región del Maule", "cierre": "2026-12-15 12:00", "estado_global": "EN PREPARACIÓN TÉCNICA (FASE IV)", "go_no_go_nota": "4.35 / 5.00 (GO)", "puntaje_simulado": 93.0, "cumplimiento_pct": 88, "inadmisibilidad_pendientes": 1, "plazo_semanas": 16, "hh_totales": 780, "escenarios": {"costo_directo": 1490.0, "agresivo": 1919.12, "objetivo": 2074.68, "conservador": 2272.25, "aprobado": null}, "revisor_final": "Director Técnico / Socio Aprobador", "requisitos": [{"id": "ADM-001", "cat": "Administrativo", "req": "Certificado vigente en Registro de Consultores MOP Área Geología y Mecánica de Rocas", "fuente": "BAG Numeral 4.2", "inadm": true, "estado": "Cumple"}, {"id": "ADM-002", "cat": "Administrativo", "req": "Garantía de Seriedad de la Oferta por 450 UF", "fuente": "BAG Numeral 9.1", "inadm": true, "estado": "En curso"}, {"id": "TEC-001", "cat": "Técnico", "req": "Mapeo geomecánico de portales y perfiles de refracción sísmica / MASW", "fuente": "TdR Cap. 3", "inadm": true, "estado": "Cumple"}, {"id": "TEC-002", "cat": "Técnico", "req": "Diseño de clases de excavación y soporte primario NATM según estándar Manual de Carreteras Vol. 3", "fuente": "TdR Cap. 5", "inadm": true, "estado": "Cumple"}]}, {"codigo": "DEMO-CLM-2026", "nombre": "Informe Pericial Geotécnico por Condición de Terreno Imprevista (Differing Site Conditions) en Túnel de Aducción", "mandante": "Constructora Obras Subterráneas del Pacífico Ltda. (Ejemplo Demo)", "portal": "Invitación Directa Confidencial (NDA)", "modalidad": "Tarifas HH + Suma Alzada Informe Pericial", "ubicacion": "Región del Biobío, Chile", "cierre": "2026-11-25 18:00", "estado_global": "APROBADA PARA ENVÍO", "go_no_go_nota": "4.90 / 5.00 (GO)", "puntaje_simulado": 99.0, "cumplimiento_pct": 100, "inadmisibilidad_pendientes": 0, "plazo_semanas": 6, "hh_totales": 310, "escenarios": {"costo_directo": 645.0, "agresivo": 830.76, "objetivo": 898.1, "conservador": 983.63, "aprobado": 980.0}, "revisor_final": "Director Técnico / Socio Aprobador", "requisitos": [{"id": "TEC-001", "cat": "Técnico", "req": "Contraste entre Informe Geotécnico de Línea Base (GBR) de licitación y mapeo real de frentes ejecutados", "fuente": "TdR Peritaje Numeral 2.1", "inadm": true, "estado": "Cumple"}, {"id": "TEC-002", "cat": "Técnico", "req": "Cuantificación de impacto en rendimientos de avance y sobre-soporte por zona de falla no prevista", "fuente": "TdR Peritaje Numeral 2.3", "inadm": true, "estado": "Cumple"}, {"id": "EXP-001", "cat": "Experiencia", "req": "Perito Geólogo Senior con +20 años en túneles y experiencia en paneles técnicos / arbitrajes", "fuente": "TdR Peritaje Numeral 3.1", "inadm": true, "estado": "Cumple"}]}];
+let activeDemoIdx = 0;
+
+function renderSidebarAndPhases() {
+  const treeEl = document.getElementById('sidebar-tree');
+  const gridEl = document.getElementById('phases-container');
+  treeEl.innerHTML = '';
+  gridEl.innerHTML = '';
+
+  FASES.forEach(f => {
+    const habs = SKILLS.filter(s => s.f === f.id);
+    const rangeTxt = `Habilidades ${habs[0].n}–${habs[habs.length - 1].n}`;
+
+    // Sidebar group
+    const group = document.createElement('div');
+    group.className = 'tree-group';
+    group.innerHTML = `
+      <div class="tree-folder" onclick="this.nextElementSibling.classList.toggle('hidden')">
+        <span>${f.carpeta}/</span>
+        <span class="folder-badge">${habs.length}</span>
+      </div>
+      <div class="tree-children">
+        ${habs.map(h => `
+          <div class="tree-leaf" onclick="openSkillModal(${h.n})">
+            <span>habilidad-${String(h.n).padStart(2, '0')}.md</span>
+            ${[6,16,34,47,48].includes(h.n) ? '<span style="color:var(--accent)">●</span>' : ''}
+          </div>
+        `).join('')}
+      </div>
+    `;
+    treeEl.appendChild(group);
+
+    // Phase card
+    const card = document.createElement('div');
+    card.className = 'phase-card';
+    card.innerHTML = `
+      <div class="phase-card-header">
+        <h3 class="phase-card-title">${f.titulo}</h3>
+        <span class="phase-range-pill">${rangeTxt}</span>
+      </div>
+      <div>
+        ${habs.map(h => {
+          const isGate = [6,16,34,47,48].includes(h.n);
+          return `
+            <div class="skill-item" onclick="openSkillModal(${h.n})">
+              <span class="skill-index">${String(h.n).padStart(2, '0')}</span>
+              <span class="skill-label">${h.nombre}</span>
+              ${isGate ? '<span class="gate-pill">Control Aprobador</span>' : ''}
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+    gridEl.appendChild(card);
+  });
+}
+
+function openSkillModal(n) {
+  const s = SKILLS.find(x => x.n === n);
+  if (!s) return;
+  document.getElementById('m-title').textContent = `Habilidad ${String(s.n).padStart(2, '0')} · ${s.nombre}`;
+  document.getElementById('m-meta').textContent = `Rol responsable: ${s.rol}` + (s.script ? `  |  Motor Python: ${s.script}` : '');
+  document.getElementById('m-obj').textContent = s.obj;
+  document.getElementById('m-ent').innerHTML = s.ent.map(e => `<li>${e}</li>`).join('');
+  document.getElementById('m-pasos').innerHTML = s.pasos.map(p => `<li>${p}</li>`).join('');
+  document.getElementById('m-sal').textContent = s.sal;
+  const ctrlBox = document.getElementById('m-ctrl-box');
+  if (s.control) {
+    ctrlBox.classList.remove('hidden');
+    document.getElementById('m-ctrl').textContent = s.control;
+  } else {
+    ctrlBox.classList.add('hidden');
+  }
+  document.getElementById('skill-modal').classList.remove('hidden');
+}
+
+function closeSkillModal() {
+  document.getElementById('skill-modal').classList.add('hidden');
+}
+
+function switchView(view) {
+  ['mapa', 'demo', 'arquitectura'].forEach(v => {
+    document.getElementById('view-' + v).classList.toggle('hidden', v !== view);
+    document.getElementById('tab-' + v).classList.toggle('active', v === view);
+  });
+}
+
+function renderDemoSection() {
+  const listEl = document.getElementById('demo-list');
+  listEl.innerHTML = DEMOS.map((d, i) => `
+    <div class="demo-item ${i === activeDemoIdx ? 'active' : ''}" onclick="selectDemo(${i})">
+      <div class="demo-code">${d.codigo}</div>
+      <div class="demo-name">${d.nombre}</div>
+      <div class="demo-client">${d.mandante}</div>
+    </div>
+  `).join('');
+
+  const d = DEMOS[activeDemoIdx];
+  const esc = d.escenarios;
+  const detailEl = document.getElementById('demo-detail');
+  detailEl.innerHTML = `
+    <div class="kpi-grid">
+      <div class="kpi-box">
+        <div class="kpi-title">Estado del Proceso</div>
+        <div class="kpi-number" style="font-size:16px;margin-top:8px">${d.estado_global}</div>
+        <div class="kpi-foot">Go/No-Go: ${d.go_no_go_nota}</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-title">Puntaje Técnico Simulado (Hab. 45)</div>
+        <div class="kpi-number">${d.puntaje_simulado} <span style="font-size:13px;font-weight:500;color:var(--label-tertiary)">/ 100</span></div>
+        <div class="kpi-foot">Cumplimiento Matriz: ${d.cumplimiento_pct}%</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-title">Esfuerzo y Plazo</div>
+        <div class="kpi-number">${d.hh_totales} HH</div>
+        <div class="kpi-foot">Plazo: ${d.plazo_semanas} semanas · ${d.portal}</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-title">Precio Autorizado Aprobador (Hab. 48)</div>
+        <div class="kpi-number" style="color:var(--accent)">${esc.aprobado ? esc.aprobado.toLocaleString('es-CL') + ' UF' : 'Pendiente'}</div>
+        <div class="kpi-foot">Cierre: ${d.cierre}</div>
+      </div>
+    </div>
+
+    <div class="apple-table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px">
+        <div>
+          <h3 style="font-size:15px;font-weight:600">Escenarios Económicos para Decisión del Aprobador (Habilidad 34 / 48)</h3>
+          <p style="font-size:12px;color:var(--label-secondary)">Costo Directo Base: <strong>${esc.costo_directo.toLocaleString('es-CL')} UF</strong> (${d.hh_totales} HH + Terreno/Subcontratos) + 12% Gastos Generales</p>
+        </div>
+        <button class="btn-primary-apple" onclick="simularAprobacion(${activeDemoIdx})">
+          Firmar Acta de Aprobación (Demo)
+        </button>
+      </div>
+      <table class="apple-table">
+        <thead>
+          <tr>
+            <th>Escenario</th>
+            <th>Contingencia</th>
+            <th>Utilidad</th>
+            <th>Precio Neto Oferta (UF)</th>
+            <th>Acción Rápida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Escenario Agresivo</strong> (Alta competencia)</td>
+            <td>3%</td>
+            <td>12%</td>
+            <td><strong>${esc.agresivo.toLocaleString('es-CL')} UF</strong></td>
+            <td><button class="seg-btn" onclick="fijarPrecioDemo(${activeDemoIdx}, ${esc.agresivo})">Seleccionar</button></td>
+          </tr>
+          <tr>
+            <td><strong>Escenario Objetivo Estándar</strong> (Recomendado)</td>
+            <td>6%</td>
+            <td>18%</td>
+            <td><strong>${esc.objetivo.toLocaleString('es-CL')} UF</strong></td>
+            <td><button class="seg-btn" onclick="fijarPrecioDemo(${activeDemoIdx}, ${esc.objetivo})">Seleccionar</button></td>
+          </tr>
+          <tr>
+            <td><strong>Escenario Conservador</strong> (Alta complejidad / riesgo)</td>
+            <td>10%</td>
+            <td>25%</td>
+            <td><strong>${esc.conservador.toLocaleString('es-CL')} UF</strong></td>
+            <td><button class="seg-btn" onclick="fijarPrecioDemo(${activeDemoIdx}, ${esc.conservador})">Seleccionar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="apple-table-wrap">
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:10px">Matriz de Cumplimiento — ${d.codigo}</h3>
+      <table class="apple-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Categoría</th>
+            <th>Requisito Exigido en las Bases</th>
+            <th>Fuente</th>
+            <th>Inadmisibilidad</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${d.requisitos.map(r => `
+            <tr>
+              <td><strong>${r.id}</strong></td>
+              <td>${r.cat}</td>
+              <td>${r.req}</td>
+              <td style="color:var(--label-secondary)">${r.fuente}</td>
+              <td>${r.inadm ? '<strong>SÍ</strong>' : 'No'}</td>
+              <td><span class="badge-status ${r.estado === 'Cumple' ? 'ok' : 'warn'}">${r.estado}</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function selectDemo(idx) {
+  activeDemoIdx = idx;
+  renderDemoSection();
+}
+
+function fijarPrecioDemo(idx, monto) {
+  DEMOS[idx].escenarios.aprobado = monto;
+  DEMOS[idx].estado_global = 'APROBADA PARA ENVÍO';
+  renderDemoSection();
+}
+
+function simularAprobacion(idx) {
+  const d = DEMOS[idx];
+  const sugerido = d.escenarios.aprobado || d.escenarios.objetivo;
+  const val = prompt(`Aprobación Ejecutiva (Habilidad 48) — ${d.codigo}\n\nIngrese el Precio Neto Final Autorizado en UF:`, sugerido);
+  if (val !== null && !isNaN(parseFloat(val))) {
+    fijarPrecioDemo(idx, parseFloat(val));
+  }
+}
+
+function toggleTheme() {
+  const htmlEl = document.documentElement;
+  const current = htmlEl.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  htmlEl.setAttribute('data-theme', next);
+  localStorage.setItem('bidfactory-theme', next);
+  updateThemeButton(next);
+}
+
+function updateThemeButton(theme) {
+  document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+  document.getElementById('theme-label').textContent = theme === 'dark' ? 'Modo Claro' : 'Modo Oscuro';
+}
+
+(function init() {
+  const saved = localStorage.getItem('bidfactory-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeButton(saved);
+  renderSidebarAndPhases();
+  renderDemoSection();
+})();
+</script>
+</body>
+</html>

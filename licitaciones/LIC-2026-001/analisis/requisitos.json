@@ -1,0 +1,107 @@
+{
+  "requisitos": [
+    {
+      "id": "ADM-001",
+      "categoria": "Administrativo",
+      "requisito": "Garantía de Seriedad de la Oferta por 200 UF con vigencia mínima de 90 días corridos.",
+      "documento_fuente": "BAG",
+      "seccion_pagina": "Numeral 8.2, pág. 14",
+      "obligatorio": true,
+      "causal_inadmisibilidad": true,
+      "responsable": "Administrativo-Legal",
+      "documento_oferta": "Sobre Administrativo - Anexo 2 Garantía",
+      "estado": "Pendiente",
+      "evidencia_observaciones": "Solicitar boleta bancaria con al menos 72h de anticipación."
+    },
+    {
+      "id": "ADM-002",
+      "categoria": "Administrativo",
+      "requisito": "Declaración Jurada de No Conflicto de Interés y Cumplimiento Ley 20.393 firmada por Representante Legal.",
+      "documento_fuente": "BAG",
+      "seccion_pagina": "Numeral 7.1, Anexo A-3",
+      "obligatorio": true,
+      "causal_inadmisibilidad": true,
+      "responsable": "Administrativo-Legal",
+      "documento_oferta": "Sobre Administrativo - Anexo A-3",
+      "estado": "Cumple",
+      "evidencia_observaciones": "Formato oficial completado listo para firma."
+    },
+    {
+      "id": "TEC-001",
+      "categoria": "Técnico",
+      "requisito": "Mapeo geológico-geotécnico a escala 1:500 y clasificación geomecánica RMR89, Q de Barton y GSI.",
+      "documento_fuente": "TdR",
+      "seccion_pagina": "Sección 4.1, pág. 8",
+      "obligatorio": true,
+      "causal_inadmisibilidad": true,
+      "responsable": "Especialista Técnico",
+      "documento_oferta": "Propuesta Técnica - Cap. 2 Metodología, numeral 2.1",
+      "estado": "Cumple",
+      "evidencia_observaciones": "Incluido con fichas de estación y entrega en GIS (GPKG/SHP)."
+    },
+    {
+      "id": "EXP-001",
+      "categoria": "Experiencia y Equipo",
+      "requisito": "Jefe de Proyecto Geólogo o Ingeniero Civil con al menos 15 años de experiencia en geotecnia y obras subterráneas.",
+      "documento_fuente": "BAE",
+      "seccion_pagina": "Numeral 5.3, pág. 6",
+      "obligatorio": true,
+      "causal_inadmisibilidad": true,
+      "responsable": "Bid Manager",
+      "documento_oferta": "Propuesta Técnica - Cap. 3 Equipo y Anexo CVs",
+      "estado": "Cumple",
+      "evidencia_observaciones": "Se propone a Carlos Ávila (+20 años exp., 7 centrales hidroeléctricas y túneles Codelco)."
+    },
+    {
+      "id": "ECO-001",
+      "categoria": "Económico",
+      "requisito": "Formulario de Presupuesto en UF sin IVA, desglosando terreno, gabinete, ensayos y gastos generales.",
+      "documento_fuente": "BAE",
+      "seccion_pagina": "Anexo Económico E-1",
+      "obligatorio": true,
+      "causal_inadmisibilidad": true,
+      "responsable": "Estimador de Costos",
+      "documento_oferta": "Sobre Económico - Formulario E-1",
+      "estado": "En curso",
+      "evidencia_observaciones": "Cruzar cantidades con EDT en costos.xlsx."
+    }
+  ],
+  "criterios": [
+    {
+      "id": "CRIT-01",
+      "criterio": "Experiencia de la Empresa en estudios similares",
+      "ponderacion_pct": 25.0,
+      "puntaje_max": 100,
+      "regla_puntaje": "5 o más proyectos verificados en geotecnia/túneles = 100 pts; 3-4 = 70 pts; <3 = 30 pts.",
+      "estrategia_geologgia": "Presentar los 7 proyectos hidroeléctricos + 3 proyectos Codelco + Mineroducto Coloso.",
+      "puntaje_simulado": 100
+    },
+    {
+      "id": "CRIT-02",
+      "criterio": "Experiencia del Jefe de Proyecto y Equipo Clave",
+      "ponderacion_pct": 25.0,
+      "puntaje_max": 100,
+      "regla_puntaje": "Jefe de Proyecto >15 años en especialidad = 100 pts.",
+      "estrategia_geologgia": "Destacar +20 años de experiencia del Director de Proyecto en terreno y claims.",
+      "puntaje_simulado": 95
+    },
+    {
+      "id": "CRIT-03",
+      "criterio": "Metodología y Plan de Trabajo",
+      "ponderacion_pct": 20.0,
+      "puntaje_max": 100,
+      "regla_puntaje": "Comprensión del problema (40%), metodología detallada por actividad (40%), Carta Gantt y QA/QC (20%).",
+      "estrategia_geologgia": "Alinear numeración 1:1 con el TdR e incluir entregable GIS + modelo 3D sin costo adicional.",
+      "puntaje_simulado": 95
+    },
+    {
+      "id": "CRIT-04",
+      "criterio": "Oferta Económica",
+      "ponderacion_pct": 30.0,
+      "puntaje_max": 100,
+      "regla_puntaje": "Fórmula Pmin / Pi * 100 (mínimo técnico para abrir sobre económico: 75 pts).",
+      "estrategia_geologgia": "Evaluar escenario Objetivo vs Agresivo en costos.xlsx.",
+      "puntaje_simulado": 90
+    }
+  ]
+}

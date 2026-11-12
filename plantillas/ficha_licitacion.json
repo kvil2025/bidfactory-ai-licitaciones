@@ -1,0 +1,43 @@
+{
+  "codigo": "LIC-YYYY-001",
+  "nombre": "Nombre oficial de la licitación según bases",
+  "mandante": "Nombre de la empresa o institución mandante",
+  "unidad_compradora": "Gerencia / División / Región",
+  "portal": "Mercado Público | SAP Ariba | Coupa | Correo directo",
+  "id_portal": "ID en el portal (ej. 1234-56-LP26)",
+  "disciplina": [
+    "geologia",
+    "geotecnia",
+    "tuneles",
+    "mineria",
+    "energia",
+    "claims"
+  ],
+  "ubicacion": "Comuna / Faena, Región, Altitud m s.n.m.",
+  "modalidad_contrato": "Suma Alzada | Serie de Precios Unitarios | Tarifas HH | Mixto",
+  "moneda": "UF | CLP | USD",
+  "presupuesto_referencial": null,
+  "plazo_ejecucion_dias": 90,
+  "visita_terreno_obligatoria": true,
+  "garantia_seriedad": {
+    "exigida": true,
+    "monto": "Monto y moneda",
+    "glosa": "Glosa literal exigida en las bases",
+    "vigencia_dias": 90
+  },
+  "contacto_oficial": {
+    "nombre": "Nombre encargado de licitación",
+    "email": "correo@mandante.cl"
+  },
+  "hitos": {
+    "publicacion": "2026-11-11",
+    "visita_terreno": "2026-11-16 10:00",
+    "cierre_consultas": "2026-11-18 18:00",
+    "respuestas_mandante": "2026-11-22 18:00",
+    "cierre_ofertas": "2026-11-28 15:00",
+    "apertura_tecnica": "2026-11-28 16:00",
+    "apertura_economica": "2026-12-05 11:00",
+    "adjudicacion_estimada": "2026-12-15"
+  },
+  "resumen_alcance": "Descripción sintética en 3-5 líneas del problema técnico y entregables principales."
+}
